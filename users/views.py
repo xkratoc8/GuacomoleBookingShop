@@ -22,14 +22,14 @@ def register(request):
         form = UserRegistrationForm()
         return render(request, {'form': form})
 
-    @login_required
-    def profile(request):
+@login_required
+def profile(request):
         if request.method == 'POST':
             update_form = UserUpdateForm(request.POST, instance=request.user)
             profile_form = ProfileUpdateForm(
                 request.FILES, request.POST, instance=request.user.profile)
 
-            if form.is_valid():
+            if update_form.is_valid():
                 update_form.save()
                 profile_form.save()
                 messages.success(
