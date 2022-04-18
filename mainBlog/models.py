@@ -9,8 +9,7 @@ class Posts(models.Model):
     type = models.CharField(max_length=100)
     year = models.CharField(max_length=100)
     book_name = models.CharField(max_length=100)
-    selections = models.CharField(max_length=100)
-    firm_price = models.CharField(max_length=100)
+    price = models.CharField(max_length=100)
     date_posted = models.DateTimeField(default=timezone.now)
     book_img = models.ImageField(upload_to="pics")
     email = models.CharField(max_length=100)
@@ -21,19 +20,18 @@ class Posts(models.Model):
         return self.book_name
 
     def get_absolute_url(self):
-        return reverse('post-detail',kwargs={'pk':self.pk})
+        return reverse('post-detail', kwargs={'pk': self.pk})
 
+##    class ebooks(models.Model):
+  ##      username = models.ForeignKey(User, on_delete=models.CASCADE)
+    ##    selection = models.CharField(max_length=100)
+      ##  year = models.CharField(max_length=100)
+        ##Ebook_name = models.CharField(max_length=100)
+        ##Upload_Ebook = models.FileField(upload_to='ebooks')
+        ##date_posted = models.DateTimeField(default=timezone.now())
 
-    class ebooks(models.Model):
-        username = models.ForeignKey(User,on_delete=models.CASCADE)
-        selection = models.CharField(max_length=100)
-        year = models.CharField(max_length=100)
-        Ebook_name = models.CharField(max_length=100)
-        Upload_Ebook = models.FileField(upload_to='ebooks')
-        date_posted = models.DateTimeField(default=timezone.now())
+        ##def __str__(self):
+          ##  return self.Ebook_name
 
-        def __str__(self):
-            return self.Ebook_name
-
-        def get_absolute_url(self):
-            return reverse('pdf-detail', kwargs={'pk': self.pk})
+      ##  def get_absolute_url(self):
+         ##   return reverse('pdf-detail', kwargs={'pk': self.pk})

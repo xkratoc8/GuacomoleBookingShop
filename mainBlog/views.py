@@ -33,7 +33,7 @@ class DetailViewAfter(DetailView):
 
 class CreateViewAfter(CreateView, LoginRequiredMixin):
     model = Posts
-    fields = ['type', 'year', 'book_name', "Author_of_book", 'email']
+    fields = ['type', 'year', 'book_name', "Author_of_book", 'email', 'contacts', 'selections', 'price', 'date_posted']
 
     def form_valid(self, form):
         form.instance.username = self.request.user
@@ -57,3 +57,6 @@ class DeleteViewAfter(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         else:
             return False
+
+# Ebooky
+# doplníme potom až na to koukneš
