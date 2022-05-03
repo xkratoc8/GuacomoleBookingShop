@@ -2,12 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from forms import UserUpdateForm, UserCreationForm, UserRegistrationForm, ProfileUpdateForm
+from users import forms
+
 
 
 def register(request):
     if request.method == 'POST':
-        form = UserRegistrationForm(request.POST)
+        form = forms.UserRegistrationForm(request.POST)
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
@@ -19,14 +20,14 @@ def register(request):
                 request, f'něco se pokazilo!!')
             return redirect('register')
     else:
-        form = UserRegistrationForm()
+        form = forms.UserRegistrationForm()
         return render(request, {'form': form})
 
 @login_required
 def profile(request):
         if request.method == 'POST':
-            update_form = UserUpdateForm(request.POST, instance=request.user)
-            profile_form = ProfileUpdateForm(
+            update_form = forms.UserUpdateForm(request.POST, instance=request.user)
+            profile_form = forms.ProfileUpdateForm(
                 request.FILES, request.POST, instance=request.user.profile)
 
             if update_form.is_valid():
@@ -37,8 +38,8 @@ def profile(request):
                 return redirect('profile')
 
         else:
-            update_form = UserUpdateForm(instance=request.user)
-            profile_form = ProfileUpdateForm(instance=request.user.profile)
+            update_form = forms.UserUpdateForm(instance=request.user)
+            profile_form = forms.ProfileUpdateForm(instance=request.user.profile)
 
             context = {
                 update_form: update_form,
