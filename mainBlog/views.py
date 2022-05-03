@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, DeleteView, CreateView, R
 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
-from models import Posts, Ebooks
+from .models import Posts, Ebooks
 
 
 class ListViewAfter(ListView):
